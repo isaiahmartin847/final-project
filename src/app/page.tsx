@@ -1,77 +1,83 @@
-"use client"; // Ensure this runs on the client side
+"use client";
 
-import { useEffect, useState } from "react";
+import {
+  Animator,
+  ScrollContainer,
+  ScrollPage,
+  batch,
+  Fade,
+  MoveIn,
+  MoveOut,
+  Sticky,
+} from "react-scroll-motion";
 import InfoBlock from "./component/block";
 
-const MainPage = () => {
-  const loremText = `Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea vel
-            nulla perspiciatis ipsam dolorem veniam voluptatum voluptatem
-            expedita fugit quod nostrum optio voluptate fuga quaerat possimus
-            neque quisquam, exercitationem eaque maiores corrupti earum
-            quibusdam sed accusantium. Ex molestiae ipsum facilis iste magni
-            iure eum fugit, facere, corporis a eveniet deserunt omnis assumenda
-            in tenetur accusantium minima, error ea adipisci id neque odio
-            ipsam! Nulla, numquam at delectus impedit, enim soluta iure debitis
-            totam repellat perferendis reprehenderit beatae omnis quod tenetur!
-            Debitis, atque delectus. Tenetur adipisci ea voluptate incidunt
-            inventore suscipit. Esse velit nemo accusamus sit voluptate
-            consequatur nobis, inventore ex.`;
+const Page = () => {
+  const FadeUp = batch(Fade(), MoveIn(0, 700), Sticky(), MoveOut(0, -700));
+
+  const testText = `Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque, nam molestiae! Distinctio dolore amet perspiciatis voluptatem perferendis rem, est maxime tenetur illo eaque possimus qui, nostrum quia error mollitia? Dicta culpa iste aspernatur vitae, unde sint eum asperiores explicabo, voluptatem animi iusto repellat nihil! Illum voluptas eius voluptates eligendi quos architecto sequi reprehenderit alias commodi voluptate nesciunt, aspernatur tempora, maiores, repudiandae ex soluta et in placeat qui ipsum amet magni neque rerum? Facere harum perferendis quam dignissimos! Maxime qui, et totam tempora, dolores numquam eum odio vel consectetur veniam deserunt perferendis id quos deleniti. Nihil est quod laboriosam amet ullam?`;
 
   return (
     <div>
-      <HorizontalScrollProgressBar />
-      <div className="mt-2 border-2 border-red-500 mx-60 py-20 space-y-20">
-        {/* first block */}
-        <InfoBlock
-          title="Opening statement"
-          text={loremText}
-        />
-        {/* second block */}
-        <InfoBlock
-          title="What is Pedophilic disorder?"
-          text={loremText}
-        />
+      <ScrollContainer>
+        <ScrollPage>
+          <Animator animation={batch(Fade(), Sticky(), MoveOut(0, -400))}>
+            <div className="">
+              <InfoBlock
+                text={testText}
+                title="Opening statement"
+              />
+            </div>
+          </Animator>
+        </ScrollPage>
+        <ScrollPage>
+          <Animator animation={FadeUp}>
+            <div className="">
+              <InfoBlock
+                text={testText}
+                title="What is Pedophilic disorder? "
+              />
+            </div>
+          </Animator>
+        </ScrollPage>
+        <ScrollPage>
+          <Animator animation={FadeUp}>
+            <div className="">
+              <InfoBlock
+                text={testText}
+                title="What is child sexual abuse? "
+              />
+            </div>
+          </Animator>
+        </ScrollPage>
+        <ScrollPage>
+          <Animator animation={FadeUp}>
+            <div className="">
+              <InfoBlock
+                text={testText}
+                title="Key difference between pedophilic disorder and child sexual abuse? "
+              />
+            </div>
+          </Animator>
+        </ScrollPage>
 
-        {/* third block */}
-        <InfoBlock
-          title="What is child sexual abuse?"
-          text={loremText}
-        />
-
-        {/* fourth block */}
-        <InfoBlock
-          title="Key difference between pedophilic disorder and child sexual abuse? "
-          text={loremText}
-        />
-      </div>
+        <ScrollPage>
+          <Animator animation={batch(Fade(), Sticky())}>
+            <div className="text-center px-4 sm:px-6 lg:px-8">
+              <span className="text-2xl sm:text-3xl md:text-4xl lg:text-[40px]">
+                Done
+              </span>
+              <br />
+              <span className="text-lg sm:text-xl md:text-2xl lg:text-3xl">
+                There's FadeAnimation, MoveAnimation, StickyAnimation,
+                ZoomAnimation
+              </span>
+            </div>
+          </Animator>
+        </ScrollPage>
+      </ScrollContainer>
     </div>
   );
 };
 
-function HorizontalScrollProgressBar() {
-  const [scrollProgress, setScrollProgress] = useState(0);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollTop = window.scrollY;
-      const documentHeight =
-        document.documentElement.scrollHeight - window.innerHeight;
-      const progress = (scrollTop / documentHeight) * 100;
-      setScrollProgress(progress);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  return (
-    <div className="fixed top-0 left-0 w-full h-2 bg-gray-200 z-50">
-      <div
-        className="h-full bg-blue-500"
-        style={{ width: `${scrollProgress}%` }}
-      />
-    </div>
-  );
-}
-
-export default MainPage;
+export default Page;
