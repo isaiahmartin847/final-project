@@ -11,6 +11,7 @@ import {
   Sticky,
 } from "react-scroll-motion";
 import InfoBlock from "./component/block";
+import DonateBlock from "./component/donate";
 
 const Page = () => {
   const FadeUp = batch(Fade(), MoveIn(0, 700), Sticky(), MoveOut(0, -700));
@@ -63,7 +64,7 @@ const Page = () => {
 
         <ScrollPage>
           <Animator animation={batch(Fade(), Sticky())}>
-            <div className="text-center px-4 sm:px-6 lg:px-8">
+            {/* <div className="text-center px-4 sm:px-6 lg:px-8">
               <span className="text-2xl sm:text-3xl md:text-4xl lg:text-[40px]">
                 Done
               </span>
@@ -72,7 +73,8 @@ const Page = () => {
                 There's FadeAnimation, MoveAnimation, StickyAnimation,
                 ZoomAnimation
               </span>
-            </div>
+            </div> */}
+            <DonateBlock />
           </Animator>
         </ScrollPage>
       </ScrollContainer>
