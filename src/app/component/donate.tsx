@@ -5,8 +5,8 @@ import Link from "next/link";
 
 const DonateBlock = () => {
   return (
-    <div className="flex flex-col justify-center items-center space-y-2">
-      <h1 className="text-lg lg:text-5xl">
+    <div className="flex flex-col justify-center items-center text-center space-y-2 w-screen max-w-[900px]">
+      <h1 className="text-xl lg:text-5xl">
         Help by donating to the Arizona Coalition to End Sexual and Domestic
         Violence.
       </h1>
